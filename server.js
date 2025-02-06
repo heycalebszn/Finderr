@@ -1,5 +1,5 @@
 const express = require('express');
-const noble = require('@abandonware/noble');
+//const noble = require('@abandonware/noble');
 const wifi = require('node-wifi');
 const cors = require('cors');
 const geolocation = require('geolocation');
@@ -13,7 +13,7 @@ const estimateDistance = (rssi) => {
     return Math.round(Math.pow(10, (-69 - rssi) / (10 * 2))) + "M Away From You";
 };
 
-const scanBluetoothDevices = () => {
+/*const scanBluetoothDevices = () => {
     return new Promise((resolve) => {
         noble.on('discover', (peripheral) => {
             resolve([{
@@ -26,7 +26,7 @@ const scanBluetoothDevices = () => {
         setTimeout(() => noble.stopScanning(), 5000);
     });
 };
-
+*/
 const scanWiFiDevices = async () => {
     return new Promise((resolve, reject) => {
         wifi.scan((err, networks) => {
