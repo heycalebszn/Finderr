@@ -1,9 +1,10 @@
 const express = require('express');
 const noble = require('@abandonware/noble');
 const wifi = require('node-wifi');
-
+const cors = require('cors');
 const app = express();
 const port = 3200;
+app.use(cors());
 
 wifi.init({ iface: null }); 
 

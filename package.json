@@ -14,6 +14,7 @@
   "dependencies": {
     "@abandonware/noble": "^1.9.2-25",
     "ble-scan": "^0.2.0",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "noble": "^1.9.1",
     "node-wifi": "^2.0.16"
