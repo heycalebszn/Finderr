@@ -7,6 +7,7 @@ const Onboarding = () => {
         <p className="text-lg text-gray-300 text-center max-w-md">
           Locate nearby devices effortlessly. Enter a device name and find it instantly.
         </p>
+        <div className="flex gap-4">
         <Link to={"/find"}>
         <button className="mt-6 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md transition-all">
           Nearby devices
@@ -17,6 +18,7 @@ const Onboarding = () => {
           Find a device
         </button>
         </Link>
+        </div>
       </div>
     );
   };

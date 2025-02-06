@@ -1,9 +1,18 @@
 import { useState, useEffect } from "react";
 
+interface DeviceProps{
+    name: string;
+    distance: string;
+}
+
 const DeviceList = () => {
-  const [devices, setDevices] = useState([]);
+  const [devices, setDevices] = useState<DeviceProps[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  if(loading){
+    console.log("loading");
+  }
 
   useEffect(() => {
     const fetchDevices = async () => {
@@ -31,11 +40,10 @@ const DeviceList = () => {
       <h1 className="text-3xl font-bold text-green-500 bg-transparent">Nearby Devices</h1>
       {error && <p className="mt-4 text-red-400">{error}</p>}
 
-      <ul className="mt-6 w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl p-4 shadow-lg">
+      <ul className="mt-6 w-full max-w-md bg-black backdrop-blur-md rounded-xl p-[30px] shadow-lg">
         {devices.length > 0 ? (
           devices.map((device, index) => (
             <li key={index} className="p-3 bg-gray-800/50 rounded-lg mt-2 text-white bg-transparent">
-                {loading && (<h3>Loading</h3>)}
               <span className="font-semibold bg-transparent" >{device.name}</span> - {device.distance}
             </li>
           ))

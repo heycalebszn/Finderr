@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import DeviceList from "../components/list-devices";
 
 type Device = {
     name: string;
@@ -12,6 +11,14 @@ type Device = {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [searchResult, setSearchResult] = useState<Device | null>(null);
     const [error, setError] = useState("");
+
+    if(error){
+      console.log("error", error);
+    }
+
+    if(devices){
+      console.log("devices", devices);
+    }
   
     const fetchDevices = async () => {
       setLoading(true);
@@ -69,7 +76,7 @@ type Device = {
           </button>
         </div>
   
-        {loading && <p className="mt-4">Loading...</p>}
+        {loading && <p className="mt-4 bg-transparent">Loading...</p>}
   
         <div className="mt-8 w-full max-w-md rounded-[12px] p-[30px]">
           <h2 className="text-2xl font-semibold text-green-400">Found Device</h2>
