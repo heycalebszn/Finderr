@@ -6,7 +6,6 @@ type Device = {
   };
   
   const DeviceTracker = () => {
-    const [devices, setDevices] = useState<Device[]>([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [searchResult, setSearchResult] = useState<Device | null>(null);
@@ -16,27 +15,6 @@ type Device = {
       console.log("error", error);
     }
 
-    if(devices){
-      console.log("devices", devices);
-    }
-  
-    const fetchDevices = async () => {
-      setLoading(true);
-      setError("");
-      try {
-        const response = await fetch("http://localhost:3600/find");
-        const data = await response.json();
-        if (data.success) {
-          setDevices(data.devices);
-        } else {
-          setError("Failed to fetch devices.");
-        }
-      } catch (err) {
-        setError("Error connecting to server.");
-      }
-      setLoading(false);
-    };
-  
     const searchDevice = async () => {
       if (!searchTerm) return;
       setLoading(true);
@@ -53,14 +31,14 @@ type Device = {
     };
   
     useEffect(() => {
-      fetchDevices();
+      searchDevice();
     }, []);
   
     return (
-      <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-6 pt-[50px]">
-        <h1 className="md:text-4xl font-bold text-green-500 bg-transparent text-[2rem]">Find Device</h1>
+      <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-6 pt-[50px] h-screen">
+        <h1 className="md:text-4xl font-bold text-green-500 bg-transparent text-[2rem] ">Find Device</h1>
   
-        <div className="mt-6 flex gap-3">
+        <div className="mt-6 flex gap-3 bg-transparent">
           <input
             type="text"
             placeholder="Find a device (e.g., iPhone 11)"
@@ -72,18 +50,16 @@ type Device = {
             className="px-4 py-1 bg-green-500 hover:bg-green-600 text-white rounded shadow-lg backdrop-blur-md text-[13px]"
             onClick={searchDevice}
           >
-            Search
+            {loading ? "Searching..." : "Search"}
           </button>
         </div>
   
-        {loading && <p className="mt-4 bg-transparent">Loading...</p>}
-  
-        <div className="mt-8 w-full max-w-md rounded-[12px] p-[30px]">
-          <h2 className="text-2xl font-semibold text-green-400">Found Device</h2>
+        <div className="mt-8 w-full max-w-md rounded-[12px] p-[30px] bg-transparent border border-gray-600 shadow-2xl">
+          <h2 className="text-2xl font-semibold text-green-400 bg-transparent">Found Device</h2>
           
-          <ul className={`mt-3 ${loading ? "hidden": "flex"} `} >
+          <ul className="mt-3 " >
           {searchResult && (
-                  <p className="text-gray-400 text-xl">{searchResult.name} - {searchResult.distance}</p>
+                  <p className="text-gray-400 text-md"> <span className="font-semibold bg-transparent" >{searchResult.name}</span> - {searchResult.distance}</p>
           )}
           </ul>
         </div>

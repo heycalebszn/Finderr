@@ -40,17 +40,18 @@ const DeviceList = () => {
       <h1 className="text-3xl font-bold text-green-500 bg-transparent">Nearby Devices</h1>
       {error && <p className="mt-4 text-red-400">{error}</p>}
 
-      <ul className="mt-6 w-full max-w-md bg-black backdrop-blur-md rounded-xl p-[30px] shadow-lg">
+      <ol className="mt-8 w-full max-w-md rounded-[12px] p-[30px] bg-transparent border border-gray-600 shadow-2xl">
+        <h2 className="bg-transparent text-white border-b pb-[10px] border-gray-700">Devices near you</h2>
         {devices.length > 0 ? (
           devices.map((device, index) => (
-            <li key={index} className="p-3 bg-gray-800/50 rounded-lg mt-2 text-white bg-transparent">
+            <li key={index} className="p-3 bg-gray-800/50 rounded-lg mt-2 text-white bg-transparent list-inside">
               <span className="font-semibold bg-transparent" >{device.name}</span> - {device.distance}
             </li>
           ))
         ) : (
-          <p className="text-white bg-transparent text-center">Scanning...</p>
+          <p className="text-white bg-transparent text-center py-[10px]">Scanning...</p>
         )}
-      </ul>
+      </ol>
     </div>
   );
 };
