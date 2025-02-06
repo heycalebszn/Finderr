@@ -47,7 +47,6 @@ const DeviceTracker = () => {
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-6">
       <h1 className="text-3xl font-bold text-green-500">Device Tracker</h1>
 
-      {/* Search Input */}
       <div className="mt-6 flex gap-3">
         <input
           type="text"
@@ -67,7 +66,6 @@ const DeviceTracker = () => {
       {loading && <p className="mt-4">Loading...</p>}
       {error && <p className="mt-4 text-red-400">{error}</p>}
 
-      {/* Search Result */}
       {searchResult && (
         <div className="mt-6 p-4 bg-gray-800 rounded shadow">
           <p className="font-semibold">Closest Match:</p>
@@ -75,7 +73,6 @@ const DeviceTracker = () => {
         </div>
       )}
 
-      {/* Device List */}
       <div className="mt-8 w-full max-w-md">
         <h2 className="text-xl font-semibold">Nearby Devices</h2>
         <ul className="mt-3">
