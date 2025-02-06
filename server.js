@@ -8,7 +8,7 @@ const port = 3200;
 wifi.init({ iface: null }); 
 
 const estimateDistance = (rssi) => {
-    return Math.pow(10, (-69 - rssi) / (10 * 2)); 
+    return Math.round(Math.pow(10, (-69 - rssi) / (10 * 2))) + "m away from you";
 };
 
 const scanBluetoothDevices = () => {
@@ -25,14 +25,13 @@ const scanBluetoothDevices = () => {
     });
 };
 
-
 const scanWiFiDevices = async () => {
     return new Promise((resolve, reject) => {
         wifi.scan((err, networks) => {
             if (err) reject(err);
             const result = networks.map(n => ({
                 name: n.ssid || 'Unknown Device',
-                distance: estimateDistance(n.signal_level)
+                distance: estimateDistance(n.signal_level) 
             }));
             resolve(result);
         });
