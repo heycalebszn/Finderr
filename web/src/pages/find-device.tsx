@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-
-interface searchResultProps {
-    name: string;
-    distance: string;
-}
-
+import DeviceList from "../components/list-devices";
 
 type Device = {
     name: string;
@@ -22,7 +17,7 @@ type Device = {
       setLoading(true);
       setError("");
       try {
-        const response = await fetch("http://localhost:3200/scan");
+        const response = await fetch("http://localhost:3600/find");
         const data = await response.json();
         if (data.success) {
           setDevices(data.devices);
@@ -40,7 +35,7 @@ type Device = {
       setLoading(true);
       setError("");
       try {
-        const response = await fetch(`http://localhost:3200/find?device=${searchTerm}`);
+        const response = await fetch(`http://localhost:3600/find?device=${searchTerm}`);
         const data = await response.json();
         setSearchResult(data.success ? data.closestDevice : null);
         if (!data.success) setError(data.message);
@@ -55,19 +50,19 @@ type Device = {
     }, []);
   
     return (
-      <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-6 pt-[30px]">
-        <h1 className="text-4xl font-bold text-green-500 bg-transparent">Device Tracker</h1>
+      <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-6 pt-[50px]">
+        <h1 className="md:text-4xl font-bold text-green-500 bg-transparent text-[2rem]">Find Device</h1>
   
         <div className="mt-6 flex gap-3">
           <input
             type="text"
             placeholder="Find a device (e.g., iPhone 11)"
-            className="px-4 py-2 rounded bg-gray-800 text-white shadow-md backdrop-blur-lg bg-opacity-30 placeholder:text-[10px] outline-none"
+            className="px-4 py-2 rounded bg-gray-800 text-white shadow-md backdrop-blur-lg bg-opacity-30 placeholder:text-[10px] outline-none text-[13px]"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
-            className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded shadow-lg backdrop-blur-md"
+            className="px-4 py-1 bg-green-500 hover:bg-green-600 text-white rounded shadow-lg backdrop-blur-md text-[13px]"
             onClick={searchDevice}
           >
             Search
@@ -75,27 +70,14 @@ type Device = {
         </div>
   
         {loading && <p className="mt-4">Loading...</p>}
-        {error && <p className="mt-4 text-red-400">{error}</p>}
-  
-        {searchResult && (
-          <div className="mt-6 p-4 rounded-lg bg-white bg-opacity-10 backdrop-blur-md shadow-lg">
-            <p className="font-semibold text-lg">Closest Match:</p>
-            <p className="text-green-400 text-xl">{searchResult.name} - {searchResult.distance}</p>
-          </div>
-        )}
   
         <div className="mt-8 w-full max-w-md rounded-[12px] p-[30px]">
-          <h2 className="text-2xl font-semibold text-green-400">Nearby Devices</h2>
-          <ul className="mt-3">
-            {devices.length > 0 ? (
-              devices.map((device, index) => (
-                <li key={index} className="p-4 rounded-lg bg-white bg-opacity-10 backdrop-blur-md shadow-lg mt-2">
-                  <span className="font-semibold text-lg">{device.name}</span> - {device.distance}
-                </li>
-              ))
-            ) : (
-              <p className="text-gray-400">No devices found.</p>
-            )}
+          <h2 className="text-2xl font-semibold text-green-400">Found Device</h2>
+          
+          <ul className={`mt-3 ${loading ? "hidden": "flex"} `} >
+          {searchResult && (
+                  <p className="text-gray-400 text-xl">{searchResult.name} - {searchResult.distance}</p>
+          )}
           </ul>
         </div>
       </div>
