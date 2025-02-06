@@ -35,6 +35,7 @@ const DeviceList = () => {
         {devices.length > 0 ? (
           devices.map((device, index) => (
             <li key={index} className="p-3 bg-gray-800/50 rounded-lg mt-2 text-white bg-transparent">
+                {loading && (<h3>Loading</h3>)}
               <span className="font-semibold bg-transparent" >{device.name}</span> - {device.distance}
             </li>
           ))
