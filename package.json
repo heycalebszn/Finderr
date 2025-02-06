@@ -16,6 +16,7 @@
     "ble-scan": "^0.2.0",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "geolocation": "^0.2.0",
     "noble": "^1.9.1",
     "node-wifi": "^2.0.16"
   }
