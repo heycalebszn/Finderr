@@ -19,7 +19,7 @@ const DeviceList = () => {
       setLoading(true);
       setError("");
       try {
-        const response = await fetch("http://localhost:3600/scan");
+        const response = await fetch("https://finderr-5h9x.onrender.com/scan");
         const data = await response.json();
         if (data.success) {
           setDevices(data.devices);
