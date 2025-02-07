@@ -20,7 +20,7 @@ type Device = {
       setLoading(true);
       setError("");
       try {
-        const response = await fetch(`http://localhost:3600/find?device=${searchTerm}`);
+        const response = await fetch(`https://finderr-5h9x.onrender.com/find?device=${searchTerm}`);
         const data = await response.json();
         setSearchResult(data.success ? data.closestDevice : null);
         if (!data.success) setError(data.message);
