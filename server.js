@@ -44,7 +44,9 @@ app.get('/scan', async (req, res) => {
     try {
         //const btDevices = await scanBluetoothDevices();
         const wifiDevices = await scanWiFiDevices();
-        const devices = [...btDevices, ...wifiDevices];
+        const devices = [
+            // ...btDevices, 
+            ...wifiDevices ];
         res.json({ success: true, devices });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -60,7 +62,10 @@ app.get('/find', async (req, res) => {
     try {
        // const btDevices = await scanBluetoothDevices();
         const wifiDevices = await scanWiFiDevices();
-        const devices = [...btDevices, ...wifiDevices];
+        const devices = [ 
+            //...btDevices, 
+            ...wifiDevices
+        ];
         
         const matches = devices.filter(d => d.name.toLowerCase().includes(device.toLowerCase()));
         if (matches.length === 0) return res.json({ success: false, message: `${device} is not nearby📍` });
