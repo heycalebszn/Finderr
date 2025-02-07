@@ -1,5 +1,5 @@
 const express = require('express');
-const noble = require('@abandonware/noble');
+// const noble = require('@abandonware/noble');
 const wifi = require('node-wifi');
 const cors = require('cors');
 
@@ -13,7 +13,7 @@ const estimateDistance = (rssi) => {
     return Math.round(Math.pow(10, (-69 - rssi) / (10 * 2))) + "M Away From You";
 };
 
-const scanBluetoothDevices = () => {
+/*const scanBluetoothDevices = () => {
     return new Promise((resolve) => {
         noble.on('discover', (peripheral) => {
             resolve([{
@@ -25,7 +25,7 @@ const scanBluetoothDevices = () => {
         noble.startScanning();
         setTimeout(() => noble.stopScanning(), 5000);
     });
-};
+};*/
 
 const scanWiFiDevices = async () => {
     return new Promise((resolve, reject) => {
@@ -42,7 +42,7 @@ const scanWiFiDevices = async () => {
 
 app.get('/scan', async (req, res) => {
     try {
-        const btDevices = await scanBluetoothDevices();
+        //const btDevices = await scanBluetoothDevices();
         const wifiDevices = await scanWiFiDevices();
         const devices = [...btDevices, ...wifiDevices];
         res.json({ success: true, devices });
@@ -58,7 +58,7 @@ app.get('/find', async (req, res) => {
     }
     
     try {
-        const btDevices = await scanBluetoothDevices();
+       // const btDevices = await scanBluetoothDevices();
         const wifiDevices = await scanWiFiDevices();
         const devices = [...btDevices, ...wifiDevices];
         
